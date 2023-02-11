@@ -12,9 +12,29 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CheckboxList from "./tasks";
+import { useState } from "react";
+import { FormControl } from "@mui/material";
+import CheckboxList from "./CheckboxList";
 
-function TodoBox() {
+function TodoForm() {
+  const [tasks, setTasks] = React.useState([
+    {
+      id: 1,
+      title: "todo 1",
+      iscompleted: false,
+    },
+    {
+      id: 2,
+      title: "todo 2",
+      iscompleted: false,
+    },
+    {
+      id: 3,
+      title: "todo 3",
+      iscompleted: false,
+    },
+  ]);
+
   const theme = createTheme();
 
   return (
@@ -35,33 +55,38 @@ function TodoBox() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}></Container>
+      <Container component="main" maxWidth="sm" sx={{ mb: 16 }}></Container>
       <Paper
         variant="outlined"
         sx={{ my: { xs: 3, md: 16 }, p: { xs: 2, md: 5 } }}>
         <Typography component="h1" variant="h4" align="center">
           To do App
         </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={10}>
-            <TextField
-              required
-              id="Task"
-              name="Task"
-              label="Task"
-              fullWidth
-              autoComplete="given-task"
-              variant="standard"
-            />
-          </Grid>
-          <Grid item xs={12} sm={2}>
-            <Button variant="contained">Add Task</Button>
-          </Grid>
-          <CheckboxList />
-        </Grid>
+
+        <form>
+          <FormControl fullWidth={true}>
+            <Grid container spacing={0}>
+              <Grid item xs={6} sm={9}>
+                <TextField
+                  required
+                  id="task"
+                  name="Task"
+                  label="Task"
+                  fullWidth
+                  autoComplete="given-task"
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item xs={6} sm={3}>
+                <Button variant="contained">Add Task</Button>
+              </Grid>
+            </Grid>
+          </FormControl>
+        </form>
+        <CheckboxList tasks={tasks} />
       </Paper>
     </ThemeProvider>
   );
 }
 
-export default TodoBox;
+export default TodoForm;
