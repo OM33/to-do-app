@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -18,9 +18,32 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
-export default function CheckboxList({ tasks }) {
-  console.log(tasks);
-  console.log("en checkbox");
+export default function CheckboxList({ text }) {
+  const [tasks, setTasks] = React.useState([
+    {
+      id: 1,
+      title: "todo 1",
+      iscompleted: false,
+    },
+    {
+      id: 2,
+      title: "todo 2",
+      iscompleted: false,
+    },
+  ]);
+
+  // useEffect(() => {
+  //   console.log("inside useEffect");
+  // }, []);
+
+  // const checkTask = (event) => {
+  //   console.log(event.target.checked);
+  //   tasks.map((task) => {
+  //     if (task.id === id) task.iscompleted = !task.iscompleted;
+  //     console.log(task.iscompleted + " en " + task.id);
+  //   });
+  // };
+
   return (
     <>
       {tasks.map((task) => {
@@ -31,7 +54,7 @@ export default function CheckboxList({ tasks }) {
               <Grid item xs={4}>
                 <FormControlLabel control={<Checkbox />} label="Label" />
               </Grid>
-              <Grid item xs={4} key={id}>
+              <Grid item xs={4}>
                 <Typography>{title}</Typography>
               </Grid>
               <Grid item xs={4}>
@@ -41,25 +64,6 @@ export default function CheckboxList({ tasks }) {
           </Paper>
         );
       })}
-      {/* <Paper variant="outlined">
-            <FormGroup>
-              <Grid container spacing={2}>
-                <Grid item xs={4}>
-                  <FormControlLabel
-                    control={<Checkbox defaultChecked />}
-                    label="Label"
-                  />
-                </Grid>
-                <Grid item xs={4} key={id}>
-                  <Typography>{title}</Typography>
-                </Grid>
-                <Grid item xs={4}>
-                  <DeleteIcon />
-                </Grid>
-              </Grid>
-            </FormGroup>
-          </Paper>; */}
-      aaaaaah
     </>
   );
 }
