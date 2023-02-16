@@ -9,8 +9,8 @@ import { FormControl } from "@mui/material";
 import CheckboxList from "./CheckboxList";
 
 function TodoForm() {
-  const [text, setText] = React.useState("");
-  cconst[(tasks, setTasks)] = React.useState([
+  const [text, setText] = useState("");
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       title: "todo 1",
