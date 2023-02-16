@@ -10,11 +10,18 @@ import CheckboxList from "./CheckboxList";
 
 function TodoForm() {
   const [text, setText] = React.useState("");
-  const [newTask, setNewTask] = useState({
-    id: 0,
-    title: "todo 0",
-    iscompleted: false,
-  });
+  cconst[(tasks, setTasks)] = React.useState([
+    {
+      id: 1,
+      title: "todo 1",
+      iscompleted: false,
+    },
+    {
+      id: 2,
+      title: "todo 2",
+      iscompleted: false,
+    },
+  ]);
 
   const addTask = (text) => {
     const newtask = {
@@ -22,7 +29,7 @@ function TodoForm() {
       title: text,
       iscompleted: false,
     };
-    setNewTask(newtask);
+    setTasks([...tasks, newtask]);
   };
 
   const handleSubmit = (e) => {
@@ -59,7 +66,7 @@ function TodoForm() {
           </Grid>
         </FormControl>
       </form>
-      <CheckboxList newTask={newTask} />
+      <CheckboxList addTask={tasks} />
     </ThemeProvider>
   );
 }

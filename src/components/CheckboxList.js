@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Container,
-  iconbutton,
-} from "@mui/material";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
+import { Typography } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
@@ -19,19 +9,6 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
 export default function CheckboxList({ text }) {
-  const [tasks, setTasks] = React.useState([
-    {
-      id: 1,
-      title: "todo 1",
-      iscompleted: false,
-    },
-    {
-      id: 2,
-      title: "todo 2",
-      iscompleted: false,
-    },
-  ]);
-
   // useEffect(() => {
   //   console.log("inside useEffect");
   // }, []);
