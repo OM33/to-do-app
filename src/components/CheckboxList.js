@@ -6,8 +6,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import { useState } from "react";
 
 export default function CheckboxList({ addTask }) {
+  const taskStyle = { textdecoration: "none" };
   const checkTask = (id) => {
     addTask.map((task) => {
       if (task.id === id) {
@@ -31,7 +33,7 @@ export default function CheckboxList({ addTask }) {
                 />
               </Grid>
               <Grid item xs={4}>
-                <Typography>{title}</Typography>
+                <Typography style={taskStyle}>{title}</Typography>
               </Grid>
               <Grid item xs={4}>
                 <DeleteIcon />
