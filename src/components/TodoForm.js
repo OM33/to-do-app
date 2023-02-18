@@ -10,19 +10,8 @@ import CheckboxList from "./CheckboxList";
 
 function TodoForm() {
   const [text, setText] = useState("");
-  const [taskId, setTaskId] = useState(3);
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: "todo 1",
-      iscompleted: false,
-    },
-    {
-      id: 2,
-      title: "todo 2",
-      iscompleted: false,
-    },
-  ]);
+  const [taskId, setTaskId] = useState(0);
+  const [tasks, setTasks] = useState([]);
 
   const addTask = (text) => {
     setTaskId(taskId + 1);
