@@ -39,6 +39,11 @@ function TodoForm() {
     addTask(text);
     setText("");
   };
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
   const theme = createTheme();
 
   return (
@@ -68,7 +73,7 @@ function TodoForm() {
           </Grid>
         </FormControl>
       </form>
-      <CheckboxList addTask={tasks} />
+      <CheckboxList addTask={tasks} deleteTask={deleteTask} />
     </ThemeProvider>
   );
 }

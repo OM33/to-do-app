@@ -4,12 +4,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 
-export default function CheckboxList({ addTask }) {
-  const taskStyle = { textdecoration: "none" };
+export default function CheckboxList({ addTask, deleteTask }) {
+  const delTask = (id) => deleteTask(id);
+
   const checkTask = (id) => {
     addTask.map((task) => {
       if (task.id === id) {
@@ -26,17 +28,25 @@ export default function CheckboxList({ addTask }) {
         return (
           <Paper variant="outlined" key={id}>
             <Grid container spacing={2}>
-              <Grid item xs={4}>
+              <Grid item xs={2}>
                 <FormControlLabel
                   control={<Checkbox onChange={() => checkTask(id)} />}
-                  label="Label"
                 />
               </Grid>
-              <Grid item xs={4}>
-                <Typography style={taskStyle}>{title}</Typography>
+              <Grid item xs={8}>
+                <Typography
+                  style={
+                    iscompleted
+                      ? { textdecoration: "line-through" }
+                      : { textdecoration: "none" }
+                  }>
+                  {title}
+                </Typography>
               </Grid>
-              <Grid item xs={4}>
-                <DeleteIcon />
+              <Grid item xs={2}>
+                <IconButton size="medium" onClick={() => delTask(id)}>
+                  <DeleteIcon fontSize="medium" />
+                </IconButton>
               </Grid>
             </Grid>
           </Paper>
