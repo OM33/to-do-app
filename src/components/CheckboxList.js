@@ -6,25 +6,24 @@ import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 
-export default function CheckboxList({ addTask, deleteTask }) {
+export default function CheckboxList({ Tasks, deleteTask }) {
   const delTask = (id) => deleteTask(id);
 
   const checkTask = (id) => {
-    addTask.map((task) => {
+    Tasks.map((task) => {
       if (task.id === id) {
         task.iscompleted = !task.iscompleted;
-        console.log(task.iscompleted + " en " + task.id);
       }
     });
   };
 
   return (
     <>
-      {addTask.map((task) => {
+      {Tasks.map((task) => {
         const { id, title, iscompleted } = task;
         return (
           <Paper variant="outlined" key={id}>
-            <Grid container spacing={2}>
+            <Grid container>
               <Grid item xs={2}>
                 <FormControlLabel
                   control={<Checkbox onChange={() => checkTask(id)} />}

@@ -13,7 +13,7 @@ function TodoForm() {
   const [taskId, setTaskId] = useState(0);
   const [tasks, setTasks] = useState([]);
 
-  const addTask = (text) => {
+  const Tasks = (text) => {
     setTaskId(taskId + 1);
     const newtask = {
       id: taskId,
@@ -25,7 +25,7 @@ function TodoForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask(text);
+    Tasks(text);
     setText("");
   };
 
@@ -54,7 +54,7 @@ function TodoForm() {
                 onChange={(e) => setText(e.target.value)}
               />
             </Grid>
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={6} sm={3} rowSpacing={1}>
               <Button variant="contained" type="submit">
                 Add Task
               </Button>
@@ -62,7 +62,7 @@ function TodoForm() {
           </Grid>
         </FormControl>
       </form>
-      <CheckboxList addTask={tasks} deleteTask={deleteTask} />
+      <CheckboxList Tasks={tasks} deleteTask={deleteTask} />
     </ThemeProvider>
   );
 }
