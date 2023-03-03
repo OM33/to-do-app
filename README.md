@@ -29,16 +29,44 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
-##🐼 Walk through the application
+### Walk through the application
 Open application at http://localhost:3000
 
-###Index page
+### Index page
 ![1](https://user-images.githubusercontent.com/40617362/222809486-3b3da475-19f7-43ff-9aee-f3ade78d723b.png)
 
-###Create task
+### Create task
 Enter a task and click "Add Task" button
 ![2](https://user-images.githubusercontent.com/40617362/222809857-2624301a-20e7-4784-b906-2ec2bac765c9.png)
+You can create as many task as you want
+![4](https://user-images.githubusercontent.com/40617362/222833331-39fd697b-ccd8-4f9c-a7b0-fc572e3d45eb.png)
+
+### Task Complete
+On completion of a task, click on checkbox of the respective task card.
+![5](https://user-images.githubusercontent.com/40617362/222833420-ba5d3ed0-97ec-4da4-ba88-92d917384fb1.png)
+
+### Delete Task
+To delete a task, click on "delete" Icon. 
+![6](https://user-images.githubusercontent.com/40617362/222833551-34c77b3e-82eb-48c0-8d47-5fb678b6300a.png)
+----------------------------------------------------------------------------------------------------------------------------------------
+### Deployed Version 
+https://todo-app-om33.netlify.app/ 
+
+
+
+#Author
+- Olga Marin
+I am an Electronic engineer and Junior Developer.
+
+- Daniel Padrino *as instructor*
+https://github.com/Danswar 
+
+
+
+
+
 
 
 
