@@ -12,7 +12,7 @@ export default function CheckboxList({ Tasks, deleteTask }) {
   const checkTask = (id) => {
     Tasks.map((task) => {
       if (task.id === id) {
-        task.iscompleted = !task.iscompleted;
+        task.completed = !task.completed;
       }
     });
   };
@@ -20,7 +20,7 @@ export default function CheckboxList({ Tasks, deleteTask }) {
   return (
     <>
       {Tasks.map((task) => {
-        const { id, title, iscompleted } = task;
+        const { id, title, completed } = task;
         return (
           <Paper variant="outlined" key={id}>
             <Grid container>
@@ -32,7 +32,7 @@ export default function CheckboxList({ Tasks, deleteTask }) {
               <Grid item xs={8}>
                 <Typography
                   style={
-                    iscompleted
+                    completed
                       ? { textdecoration: "line-through" }
                       : { textdecoration: "none" }
                   }>

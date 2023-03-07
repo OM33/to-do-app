@@ -4,21 +4,34 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormControl } from "@mui/material";
 import CheckboxList from "./CheckboxList";
+
+const url = "https://jsonplaceholder.typicode.com/todos";
 
 function TodoForm() {
   const [text, setText] = useState("");
   const [taskId, setTaskId] = useState(0);
   const [tasks, setTasks] = useState([]);
 
+  const getTodos = async () => {
+    const response = await fetch(url);
+    const todos = await response.json();
+    console.log(todos);
+  };
+
+  useEffect(() => {
+    getTodos();
+  }, []);
+
   const Tasks = (text) => {
     setTaskId(taskId + 1);
     const newtask = {
+      userId: 1,
       id: taskId,
       title: text,
-      iscompleted: false,
+      completed: false,
     };
     setTasks([...tasks, newtask]);
   };
