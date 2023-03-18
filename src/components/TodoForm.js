@@ -4,21 +4,48 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormControl } from "@mui/material";
 import CheckboxList from "./CheckboxList";
+
+const url = "https://jsonplaceholder.typicode.com/todos";
 
 function TodoForm() {
   const [text, setText] = useState("");
   const [taskId, setTaskId] = useState(0);
   const [tasks, setTasks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [todos, setTodos] = useState("default todo");
+
+  const getTodos = async () => {
+    const response = await fetch(url);
+    const todos = await response.json();
+    setTodos(todos);
+    let temp = [];
+    todos.map((todo) => {
+      if (todo.id <= 10) {
+        temp.push(todo);
+        setTaskId(todo.id);
+      }
+    });
+    setTasks(temp);
+    console.log(taskId);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    getTodos();
+  }, []);
 
   const Tasks = (text) => {
     setTaskId(taskId + 1);
     const newtask = {
+      userId: 1,
       id: taskId,
       title: text,
-      iscompleted: false,
+      completed: false,
     };
     setTasks([...tasks, newtask]);
   };
@@ -62,7 +89,12 @@ function TodoForm() {
           </Grid>
         </FormControl>
       </form>
-      <CheckboxList Tasks={tasks} deleteTask={deleteTask} />
+      <CheckboxList
+        Tasks={tasks}
+        deleteTask={deleteTask}
+        isLoading={isLoading}
+        isError={isError}
+      />
     </ThemeProvider>
   );
 }

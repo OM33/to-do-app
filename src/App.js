@@ -8,43 +8,9 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import LoadingSpinner from "./components/spinner";
-
-const url = "https://jsonplaceholder.typicode.com/todos";
 
 function App() {
   const theme = createTheme();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [todos, setTodos] = useState("default todo");
-
-  const getTodos = async () => {
-    const response = await fetch(url);
-    const todos = await response.json();
-    setTodos(todos);
-    setIsLoading(false);
-    console.log(todos);
-  };
-
-  useEffect(() => {
-    setIsLoading(true);
-    getTodos();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div>
-        <LoadingSpinner />
-      </div>
-    );
-  }
-  if (isError) {
-    return (
-      <div>
-        <h1>Error...</h1>
-      </div>
-    );
-  }
 
   return (
     <ThemeProvider theme={theme}>
