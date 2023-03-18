@@ -6,7 +6,11 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import LoadingSpinner from "./components/spinner";
+
+const url = "https://jsonplaceholder.typicode.com/todos";
 
 function App() {
   const theme = createTheme();
