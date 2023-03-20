@@ -12,7 +12,6 @@ const url = "https://jsonplaceholder.typicode.com/todos";
 
 function TodoForm() {
   const [text, setText] = useState("");
-  const [taskId, setTaskId] = useState(0);
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -26,11 +25,9 @@ function TodoForm() {
     todos.map((todo) => {
       if (todo.id <= 10) {
         temp.push(todo);
-        setTaskId(todo.id);
       }
     });
     setTasks(temp);
-    console.log(taskId);
     setIsLoading(false);
   };
 
@@ -40,10 +37,9 @@ function TodoForm() {
   }, []);
 
   const Tasks = (text) => {
-    setTaskId(taskId + 1);
     const newtask = {
       userId: 1,
-      id: taskId,
+      id: tasks[tasks.length - 1].id + 1,
       title: text,
       completed: false,
     };
