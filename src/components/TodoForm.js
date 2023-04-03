@@ -15,19 +15,11 @@ function TodoForm() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [todos, setTodos] = useState("default todo");
 
   const getTodos = async () => {
     const response = await fetch(url);
     const todos = await response.json();
-    setTodos(todos);
-    let temp = [];
-    todos.map((todo) => {
-      if (todo.id <= 10) {
-        temp.push(todo);
-      }
-    });
-    setTasks(temp);
+    setTasks(todos.slice(0, 10));
     setIsLoading(false);
   };
 
