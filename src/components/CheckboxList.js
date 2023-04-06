@@ -7,22 +7,17 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import LoadingSpinner from "./spinner";
 
-export default function CheckboxList({
-  Tasks,
-  deleteTask,
-  isLoading,
-  isError,
-}) {
+export default function CheckboxList({ Tasks, deleteTask, Loading, Error }) {
   const delTask = (id) => deleteTask(id);
 
-  if (isLoading) {
+  if (Loading) {
     return (
       <div>
         <LoadingSpinner />
       </div>
     );
   }
-  if (isError) {
+  if (Error) {
     return (
       <div>
         <h1>Error...</h1>

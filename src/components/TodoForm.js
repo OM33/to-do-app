@@ -4,31 +4,36 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FormControl } from "@mui/material";
 import CheckboxList from "./CheckboxList";
+import useSWR from "swr";
 
 const url = "https://jsonplaceholder.typicode.com/todos";
+export async function fetcher() {
+  const response = await fetch(url);
+  const todos = await response.json();
+  return todos;
+}
 
 function TodoForm() {
+  const { data, isError, isLoading } = useSWR("fetcher", fetcher);
   const [text, setText] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  const getTodos = async () => {
-    const response = await fetch(url);
-    const todos = await response.json();
-    setTasks(todos.slice(0, 10));
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    setIsLoading(true);
-    getTodos();
-  }, []);
+  const [Loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  if (isError) {
+    setError(true);
+  }
+  if (isLoading) {
+    // setLoading(true);
+    // setTasks(todos.slice(0, 10));
+    console.log(data);
+    // setLoading(false);
+  }
 
   const Tasks = (text) => {
+    setLoading(true);
     const newtask = {
       userId: 1,
       id: tasks[tasks.length - 1].id + 1,
@@ -80,8 +85,8 @@ function TodoForm() {
       <CheckboxList
         Tasks={tasks}
         deleteTask={deleteTask}
-        isLoading={isLoading}
-        isError={isError}
+        Loading={Loading}
+        Error={Error}
       />
     </ThemeProvider>
   );
