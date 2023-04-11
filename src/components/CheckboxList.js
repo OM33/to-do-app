@@ -5,25 +5,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import LoadingSpinner from "./spinner";
 
-export default function CheckboxList({ Tasks, deleteTask, Loading, Error }) {
+export default function CheckboxList({ Tasks, deleteTask }) {
   const delTask = (id) => deleteTask(id);
-
-  if (Loading) {
-    return (
-      <div>
-        <LoadingSpinner />
-      </div>
-    );
-  }
-  if (Error) {
-    return (
-      <div>
-        <h1>Error...</h1>
-      </div>
-    );
-  }
 
   const checkTask = (id) => {
     Tasks.map((task) => {
