@@ -11,13 +11,12 @@ import useSWR from "swr";
 import LoadingSpinner from "./spinner";
 
 const url = "https://jsonplaceholder.typicode.com/todos";
-a;
 
 function TodoForm() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, isError, isLoading } = useSWR(url, fetcher);
   const [text, setText] = useState("");
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(data.slice(0, 10));
 
   if (isError) {
     <h1>errooooor</h1>;
@@ -31,9 +30,12 @@ function TodoForm() {
   }
 
   const Tasks = (text) => {
+    let index;
+    if (tasks.length === 0) index = 0;
+    else index = tasks[tasks.length - 1].id + 1;
     const newtask = {
       userId: 1,
-      id: tasks[tasks.length - 1].id + 1,
+      id: index,
       title: text,
       completed: false,
     };
@@ -51,10 +53,10 @@ function TodoForm() {
   };
 
   const theme = createTheme();
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      {/* <div>{setTasks(data.slice(0, 10))}</div> */}
       <form onSubmit={handleSubmit}>
         <FormControl fullWidth={true}>
           <Grid container spacing={0}>
@@ -79,7 +81,7 @@ function TodoForm() {
           </Grid>
         </FormControl>
       </form>
-      <div>{console.log(data.slice(0, 10))}</div>
+
       <CheckboxList Tasks={tasks} deleteTask={deleteTask} />
     </ThemeProvider>
   );
