@@ -4,22 +4,26 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormControl } from "@mui/material";
 import CheckboxList from "./CheckboxList";
 import useSWR from "swr";
 import LoadingSpinner from "./spinner";
 
 const url = "https://jsonplaceholder.typicode.com/todos";
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function TodoForm() {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, isError, isLoading } = useSWR(url, fetcher);
   const [text, setText] = useState("");
-  const [tasks, setTasks] = useState(data.slice(0, 10));
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    setTasks(data ? data.slice(0, 10) : []);
+  }, [data]);
 
   if (isError) {
-    <h1>errooooor</h1>;
+    <h1>errooooor - not found</h1>;
   }
   if (isLoading) {
     return (
@@ -53,10 +57,11 @@ function TodoForm() {
   };
 
   const theme = createTheme();
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* <div>{setTasks(data.slice(0, 10))}</div> */}
+
       <form onSubmit={handleSubmit}>
         <FormControl fullWidth={true}>
           <Grid container spacing={0}>
