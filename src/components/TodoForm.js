@@ -7,39 +7,39 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState, useEffect } from "react";
 import { FormControl } from "@mui/material";
 import CheckboxList from "./CheckboxList";
+import useSWR from "swr";
+import LoadingSpinner from "./spinner";
 
 const url = "https://jsonplaceholder.typicode.com/todos";
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function TodoForm() {
+  const { data, isError, isLoading } = useSWR(url, fetcher);
   const [text, setText] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [todos, setTodos] = useState("default todo");
-
-  const getTodos = async () => {
-    const response = await fetch(url);
-    const todos = await response.json();
-    setTodos(todos);
-    let temp = [];
-    todos.map((todo) => {
-      if (todo.id <= 10) {
-        temp.push(todo);
-      }
-    });
-    setTasks(temp);
-    setIsLoading(false);
-  };
 
   useEffect(() => {
-    setIsLoading(true);
-    getTodos();
-  }, []);
+    setTasks(data ? data.slice(0, 10) : []);
+  }, [data]);
+
+  if (isError) {
+    <h1>errooooor - not found</h1>;
+  }
+  if (isLoading) {
+    return (
+      <div>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   const Tasks = (text) => {
+    let index;
+    if (tasks.length === 0) index = 0;
+    else index = tasks[tasks.length - 1].id + 1;
     const newtask = {
       userId: 1,
-      id: tasks[tasks.length - 1].id + 1,
+      id: index,
       title: text,
       completed: false,
     };
@@ -61,6 +61,7 @@ function TodoForm() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
       <form onSubmit={handleSubmit}>
         <FormControl fullWidth={true}>
           <Grid container spacing={0}>
@@ -85,12 +86,8 @@ function TodoForm() {
           </Grid>
         </FormControl>
       </form>
-      <CheckboxList
-        Tasks={tasks}
-        deleteTask={deleteTask}
-        isLoading={isLoading}
-        isError={isError}
-      />
+
+      <CheckboxList Tasks={tasks} deleteTask={deleteTask} />
     </ThemeProvider>
   );
 }
